@@ -1,4 +1,4 @@
- import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
  
@@ -46,7 +46,7 @@ public class P7 {
             // 전체출력
             else if (input == 3) {
                 for (int i = 0; i < slist.size(); i++) {
-					System.out.print(slist.get(i) + " ");
+					System.out.println(slist.get(i));
 				}
             	
             	
@@ -99,4 +99,8 @@ class Student {
     public float Avg() {
         return kor+eng+math/3.0f;
     }
+    public String toString() {
+    	return "Name:" + getName() +" Korean:" +getKor()+" English:"+getEng() +" Math:"+getMath();
+    }
+    
 }
