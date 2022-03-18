@@ -6,18 +6,16 @@ public class A2 {
 		
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
-//		MultiThread runner = new MultiThread();
-//		runner.run();
-//		
-//		public boolean doGame(MultiThread[] thread) {
-//			boolean isEnd = true;
-//			for (int i = 0; i < n; i++) {
-//				thread[i].runGame();
-//				isEnd = isEnd && thread[i].isEnd;
-//			}
-//			return isEnd;
-//		}
+
+		MultiThread[] runners = new MultiThread[n];
 		
+		for (int i = 0; i < n; i++) {
+			String name = "Runner"+(i+1);
+			runners[i]= new MultiThread(name);
+		}
+		for (int i = 0; i < n; i++) {
+			runners[i].start();
+		}
 
 	}
 }
@@ -29,7 +27,9 @@ class MultiThread extends Thread {
 	static int rank = 0;
 	
 	MultiThread(String name) {
-		this.name = name;
+		setName(name);
+		this.name = getName();
+		System.out.println(getName());
 	}
 
 	public void run() {
@@ -39,7 +39,8 @@ class MultiThread extends Thread {
 			if(this.isEnd) {
 				break;
 			}
-			int sleepTime = ran.nextInt(10)*1000;
+//			int sleepTime = ran.nextInt(10)*1000;
+			int sleepTime = 1000;
 			try {
 				Thread.sleep(sleepTime);
 			} catch (InterruptedException e) {
@@ -52,7 +53,7 @@ class MultiThread extends Thread {
 	public void runGame() {
 		if(!this.isEnd) {
 			this.distance = this.distance +(int)Math.floor(Math.random()*10);
-			System.out.println(this.name+":"+this.distance);
+			System.out.println(this.name+" : "+this.distance+"m");
 			this.checkEnd();
 		}
 	}
@@ -61,7 +62,7 @@ class MultiThread extends Thread {
 		if(distance>=50) {
 			isEnd = true;
 			MultiThread.rank++;
-			System.out.println(this.name + "is goal. Rank"+MultiThread.rank);
+			System.out.println(this.name + " is goal. Rank"+MultiThread.rank);
 		}
 	}
 	
